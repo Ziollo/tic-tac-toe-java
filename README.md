@@ -25,16 +25,9 @@ Projekt jest w trakcie rozwoju – interfejs użytkownika (UI) znajduje się obe
 * **Java**
 * **Swing** (obsługa GUI)
 
-## Jak uruchomić
 
-1. Sklonuj repozytorium:
-   ```bash
-   git clone [https://github.com/Ziollo/tic-tac-toe-java.git](https://github.com/Ziollo/tic-tac-toe-java.git)
-   cd tic-tac-toe-java/src
-   javac *.java
-   ```
-   ## Struktura projektu
-   src/Main.java – punkt startowy aplikacji.
+## Struktura projektu
+src/Main.java – punkt startowy aplikacji.
 
 src/GUI.java – interfejs użytkownika.
 
