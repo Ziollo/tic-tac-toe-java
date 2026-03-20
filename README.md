@@ -8,7 +8,7 @@ Projekt jest w trakcie rozwoju – interfejs użytkownika (UI) znajduje się obe
 
 | Wybór poziomu | Ekran startowy | Rozgrywka |
 | :---: | :---: | :---: |
-| ![Menu](menu.png) | ![Start](start.png) | ![Gra](gra.png) |
+| ![Menu](menu.png) | ![Start](start.png) | ![Gra](game.png) |
 
 ## Funkcje
 
