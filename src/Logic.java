@@ -1,66 +1,40 @@
 import javax.swing.*;
 
-public class Logic {
+public abstract class Logic {
 
-    private JLabel writting;
-    private JButton[] fields;
-    private JLabel result;
-    private String level;
-    private boolean movementPlayer;
-    private boolean movementComputer;
+    protected JLabel writting;
+    protected JButton[] fields;
 
-    private int pointsX = 0;
-    private int pointsO = 0;
+    protected JLabel p1ScoreLabel;
+    protected JLabel p2ScoreLabel;
+    protected JLabel drawScoreLabel;
 
-    public Logic(JLabel writting, JButton[] fields, JLabel result, String level) {
+    protected String level;
+    protected boolean isXTurn;
+    protected boolean isGameActive;
+
+    protected String player1Name;
+    protected String player2Name;
+
+    protected int pointsX = 0;
+    protected int pointsO = 0;
+    protected int pointsDraw = 0; // Dodano zliczanie remisów
+
+    public Logic(JLabel writting, JButton[] fields, JLabel p1ScoreLabel, JLabel p2ScoreLabel, JLabel drawScoreLabel, String level, String player1Name, String player2Name) {
         this.writting = writting;
         this.fields = fields;
-        this.result = result;
+        this.p1ScoreLabel = p1ScoreLabel;
+        this.p2ScoreLabel = p2ScoreLabel;
+        this.drawScoreLabel = drawScoreLabel;
         this.level = level;
 
-        this.movementPlayer = true;
-        this.movementComputer = true;
+        this.player1Name = player1Name;
+        this.player2Name = player2Name;
+        this.isXTurn = true;
+        this.isGameActive = true;
     }
 
-    public void playerMove(JButton click) {
-        if (click.getText().equals("") && movementPlayer) {
-            click.setText("X");
-            click.setForeground(Style.color_X);
-
-
-            if (!judge()) {
-                writting.setText("Ruch komputera....");
-                movementComputer = true;
-                movementPlayer = false;
-                computerMove();
-            }
-        }
-    }
-
-    public void computerMove() {
-        if (!movementComputer) return;
-
-        int chosenMove = -1;
-
-        if (level.equals("Łatwy")) {
-            LevelEasy easy = new LevelEasy();
-            chosenMove = easy.getMove(fields);
-        } else if (level.equals("Normalny")) {
-            LevelNormal normal = new LevelNormal();
-            chosenMove = normal.getMove(fields);
-        }
-
-        if (chosenMove != -1) {
-            fields[chosenMove].setText("O");
-            fields[chosenMove].setForeground(Style.color_O);
-            movementComputer = false;
-
-            if (!judge()) {
-                writting.setText("Ruch Gracza....");
-                movementPlayer = true;
-            }
-        }
-    }
+    public abstract void playerMove(JButton click);
 
     public boolean judge() {
         String[] points = new String[9];
@@ -87,24 +61,25 @@ public class Logic {
         }
         if (remis) {
             writting.setText("Remis!");
-            movementPlayer = false;
-            movementComputer = false;
+            pointsDraw++;
+            drawScoreLabel.setText("Remisy: " + pointsDraw);
+            isGameActive = false;
             return true;
         }
         return false;
     }
 
     public void stopGame(String win) {
-        writting.setText("Wygrał: " + win + "!!");
-        movementPlayer = false;
-        movementComputer = false;
-
+        isGameActive = false;
         if (win.equals("X")) {
+            writting.setText("Wygrał: " + player1Name + "!!");
             pointsX++;
+            p1ScoreLabel.setText(String.valueOf(pointsX));
         } else if (win.equals("O")) {
+            writting.setText("Wygrał: " + player2Name + "!!");
             pointsO++;
+            p2ScoreLabel.setText(String.valueOf(pointsO));
         }
-        result.setText("X: " + pointsX + " | O: " + pointsO);
     }
 
     public void reset() {
@@ -112,8 +87,8 @@ public class Logic {
             fields[i].setText("");
         }
 
-        movementPlayer = true;
-        movementComputer = false;
-        writting.setText("Twój ruch!");
+        isXTurn = true;
+        isGameActive = true;
+        writting.setText("Ruch: " + player1Name);
     }
 }
