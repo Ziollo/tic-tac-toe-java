@@ -1,40 +1,46 @@
 # Tic-Tac-Toe (Java Swing)
 
-Gra Kółko i Krzyżyk napisana w języku Java z wykorzystaniem biblioteki Swing. 
+W pełni funkcjonalna gra Kółko i Krzyżyk napisana w języku Java z wykorzystaniem biblioteki Swing. 
 
-Projekt jest w trakcie rozwoju – interfejs użytkownika (UI) znajduje się obecnie w wersji beta, ale pełna logika gry jest już w 100% zaimplementowana i grywalna.
-
-## Wygląd aplikacji (Wersja Beta)
-
-| Wybór poziomu | Ekran startowy | Rozgrywka |
-| :---: | :---: | :---: |
-| ![Menu](menu.png) | ![Start](start.png) | ![Gra](game.png) |
+Projekt posiada nowoczesny, niestandardowy interfejs graficzny (Dark Mode), obsługuje dwa tryby rozgrywki (Solo i Duo) oraz jest zoptymalizowany do działania na różnych systemach operacyjnych (w tym macOS).
 
 ## Funkcje
 
-* **Graficzny interfejs użytkownika (GUI)** (wersja beta) z dopasowaną kolorystyką dla gracza i komputera.
-* **Gra przeciwko komputerowi** (singleplayer).
-* **Dwa poziomy trudności:**
-  * **Easy** – komputer wykonuje całkowicie losowe ruchy.
-  * **Normal** – komputer analizuje planszę, blokuje Twoje ruchy i szuka szansy na własną wygraną.
-* **System punktów** na bieżąco zliczający wynik starcia (X vs O).
-* **Reset gry** pozwalający wyczyścić planszę bez wyłączania aplikacji.
+* **Dwa tryby gry:**
+  * **Solo:** Gra przeciwko komputerowi.
+  * **Duo:** Lokalny tryb wieloosobowy (PvP) dla dwóch graczy na jednym ekranie.
+* **Personalizacja:** Możliwość wpisania własnych imion graczy przed rozpoczęciem partii.
+* **Dwa poziomy trudności (Tryb Solo):**
+  * **Łatwy (Easy):** Komputer wykonuje losowe ruchy.
+  * **Normalny (Normal):** Komputer analizuje planszę, potrafi blokować ruchy gracza i szuka szans na wygraną.
+* **Zaawansowana tablica wyników:** System na bieżąco zlicza wygrane obu graczy oraz remisy w trakcie trwania sesji.
+* **Nowoczesny interfejs (UI):** Autorski "Dark Mode" ze spersonalizowanymi kolorami, efektami najechania (hover) i wsparciem wyświetlania na systemie macOS.
+
+## Wygląd aplikacji 
+
+**Krok 1: Wybierz tryb i poziom**
+| Wybór trybu (Solo/Duo) | Wybór poziomu trudności |
+| :---: | :---: | 
+| ![Tryb](tryb_gry.png) | ![LvL](tryb_lvl.png) | 
+
+**Krok 2: Wpisz imiona i graj**
+| Ekran startowy 1 | Ekran startowy 2 | Rozgrywka |
+| :---: | :---: | :---: | 
+| ![Menu 1](menu_1.png) | ![Menu 2](menu_2.png) | ![Gra](game.png) |
 
 ## Technologie
 
-* **Java**
-* **Swing** (obsługa GUI)
-
+* **Java** (Logika obiektowa)
+* **Java Swing & AWT** (Interfejs graficzny)
 
 ## Struktura projektu
-src/Main.java – punkt startowy aplikacji.
 
-src/GUI.java – interfejs użytkownika.
+Projekt został podzielony na obiekty, aby oddzielić warstwę wizualną (GUI) od logiki gry:
 
-src/logic.java – główna logika gry.
-
-src/LevelEasy.java – łatwy algorytm AI.
-
-src/LevelNormal.java – normalny algorytm AI.
-
-src/Style.java – stylowanie i konfiguracja wyglądu GUI.
+* `Main.java` – Punkt startowy aplikacji.
+* `GUI.java` – Główna klasa odpowiedzialna za generowanie okien, układów (Layouts) i przechodzenie między ekranami.
+* `Style.java` – Zewnętrzna klasa przechowująca całą konfigurację wizualną (kolory, fonty, wymiary, poprawki systemowe).
+* `Logic.java` – Klasa abstrakcyjna zawierająca główne zasady gry i sprawdzanie warunków wygranej/remisu.
+* `LogicSolo.java` – Implementacja logiki dla trybu jednoosobowego (komunikacja z algorytmami AI).
+* `MoveToPlayer.java` – Implementacja logiki dla trybu dwuosobowego (zmiana tur między graczami).
+* `LevelEasy.java` / `LevelNormal.java` – Algorytmy sterujące ruchami komputera.
