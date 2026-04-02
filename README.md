@@ -31,7 +31,7 @@ Projekt posiada nowoczesny, niestandardowy interfejs graficzny (Dark Mode), obs≈
 ## Technologie
 
 * **Java** (Logika obiektowa)
-* **Java Swing & AWT** (Interfejs graficzny)
+* **Java Swing ** (Interfejs graficzny)
 
 ## Struktura projektu
 
